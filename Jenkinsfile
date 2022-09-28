@@ -6,7 +6,7 @@ pipeline {
    stages{
     stage('CompileandRunSonarAnalysis') {
             steps {	
-		sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=asgbuggywebapp -Dsonar.organization=asgbuggywebapp -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=932558e169d66a8f1d1adf470b908a46156f5844'
+		sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=buggyapp-pipeline -Dsonar.organization=buggyapp-pipeline -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=fa6c222b458e33a3c2fe60bc72ea74e534b4538a'
 			}
     }
 
@@ -31,7 +31,7 @@ pipeline {
 	stage('Push') {
             steps {
                 script{
-                    docker.withRegistry('https://145988340565.dkr.ecr.us-west-2.amazonaws.com', 'ecr:us-west-2:aws-credentials') {
+                    docker.withRegistry('https://614938384999.dkr.ecr.us-east-1.amazonaws.com/asg', 'ecr:us-east-1:devsecops-guru') {
                     app.push("latest")
                     }
                 }
